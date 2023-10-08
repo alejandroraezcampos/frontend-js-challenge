@@ -18,6 +18,11 @@ import { selectTrendsByProvider } from '../store/selectors';
         <p class="trend__excerpt">{{ trend.body[0] }}</p>
       </a>
     </article>
+    <!-- <div class="trend__actions">
+    <button type="button" class="trend__action">
+      <img src="assets/Iconos/Actions/add.svg">
+    </button>
+    </div> -->
   `,
   styleUrls: ['./trends-list.component.scss'],
 })

@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import 'settings/variables';
 
 .trend {
@@ -20,6 +21,23 @@
   object-fit: cover;
   border-radius: 0.375rem;
   margin-bottom: 0.75rem;
+}
+
+.trend__actions {
+  position: absolute;
+  top: 774.02px;
+  left: 1345.69px;
+
+
+}
+.trend__action {
+  border: none;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: $primary;
+  box-shadow: 0px 6px 20px 0px #F15F4199;
+  cursor: pointer;
 }
 
 .trend__title > h2 {

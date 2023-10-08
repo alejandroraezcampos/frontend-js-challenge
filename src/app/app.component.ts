@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { delay } from 'rxjs/operators';
 
 import { CustomBreakpointObserver } from './layout';
-import { selectIsLoadingState } from './store/selectors';
+import { selectIsCollapsedState, selectIsLoadingState } from './store/selectors';
 
 @Component({
   selector: 'app-root',
@@ -25,13 +25,19 @@ import { selectIsLoadingState } from './store/selectors';
         <span>{{ currentDate | date: 'dd MMMM yyyy' }}</span>
       </div>
     </header>
-    <nav class="app-navigation">
+    <nav class="app-navigation"
+      [ngClass]="">
       <app-menu-small *ngIf="isSmallScreen$ | async"></app-menu-small>
       <app-menu-medium *ngIf="isMediumScreen$ | async"></app-menu-medium>
       <app-menu-large *ngIf="isLargeScreen$ | async"></app-menu-large>
     </nav>
     <main class="app-main-content">
       <router-outlet></router-outlet>
+      <div class="trend__actions">
+        <button type="button" class="trend__action">
+          <img src="assets/Iconos/Actions/add.svg">
+        </button>
+      </div>
     </main>
   `,
   styleUrls: ['./app.component.scss'],
@@ -43,6 +49,7 @@ export class AppComponent {
   isLargeScreen$ = this.breakpointsObserver.isLarge$;
   // The delay prevents ExpressionChangedAfterItHasBeenCheckedError
   isLoading$ = this.store.select(selectIsLoadingState).pipe(delay(0));
+  isCollapsed$ = this.store.select(selectIsCollapsedState).pipe(delay(0));
 
   constructor(
     private breakpointsObserver: CustomBreakpointObserver,
