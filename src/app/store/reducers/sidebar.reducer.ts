@@ -10,7 +10,7 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(
-    SidebarActions.updateSidebarCollapsedState,
+    SidebarActions.updateSidebarState,
     (state, { isCollapsed }): State => ({ ...state, isCollapsed })
   )
 );

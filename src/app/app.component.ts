@@ -4,6 +4,7 @@ import { delay } from 'rxjs/operators';
 
 import { CustomBreakpointObserver } from './layout';
 import { selectIsCollapsedState, selectIsLoadingState } from './store/selectors';
+import { updateSidebarState } from './store/actions/sidebar.actions';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ import { selectIsCollapsedState, selectIsLoadingState } from './store/selectors'
       </div>
     </header>
     <nav class="app-navigation"
-      [ngClass]="">
+      [ngClass]="{'app-navigation--opened' : (isCollapsed$ | async)}">
       <app-menu-small *ngIf="isSmallScreen$ | async"></app-menu-small>
       <app-menu-medium *ngIf="isMediumScreen$ | async"></app-menu-medium>
       <app-menu-large *ngIf="isLargeScreen$ | async"></app-menu-large>
@@ -34,7 +35,10 @@ import { selectIsCollapsedState, selectIsLoadingState } from './store/selectors'
     <main class="app-main-content">
       <router-outlet></router-outlet>
       <div class="trend__actions">
-        <button type="button" class="trend__action">
+        <button
+        class="trend__action"
+        type="button"
+        (click)="createTrend()">
           <img src="assets/Iconos/Actions/add.svg">
         </button>
       </div>
@@ -55,4 +59,9 @@ export class AppComponent {
     private breakpointsObserver: CustomBreakpointObserver,
     private store: Store
   ) {}
+
+  createTrend() {
+    console.log('createe!');
+    this.store.dispatch(updateSidebarState({isCollapsed: true}));
+  }
 }

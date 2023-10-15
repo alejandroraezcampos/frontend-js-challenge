@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { loadTrends } from '../store/actions/trends-list-page.actions';
 import { selectTrendsByProvider } from '../store/selectors';
+import { selectIsCollapsedState } from 'src/app/store/selectors/sidebar.selectors';
 
 @Component({
   selector: 'app-trends-list',
@@ -18,16 +19,17 @@ import { selectTrendsByProvider } from '../store/selectors';
         <p class="trend__excerpt">{{ trend.body[0] }}</p>
       </a>
     </article>
-    <!-- <div class="trend__actions">
-    <button type="button" class="trend__action">
-      <img src="assets/Iconos/Actions/add.svg">
-    </button>
-    </div> -->
+    <div class="overlay"></div>
+    <div class="modal">
+      <app-trend-edit></app-trend-edit>
+    </div>
+
   `,
   styleUrls: ['./trends-list.component.scss'],
 })
 export class TrendsListComponent implements OnInit {
   protected trends$ = this.store.select(selectTrendsByProvider);
+  protected isCollapsed$ = this.store.select(selectIsCollapsedState);
 
   constructor(private store: Store) {}
 

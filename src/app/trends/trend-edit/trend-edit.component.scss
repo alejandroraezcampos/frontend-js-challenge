@@ -1,0 +1,92 @@
+@import 'settings/variables';
+
+.trend-edit {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.trend-edit__header {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trend-edit__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+}
+
+.form-field {
+  font-family: $font-family;
+  margin-bottom: 40px;
+}
+
+.form-field:last-child {
+  height: 100%;
+  .form-field__box {
+    height: 100%;
+  }
+}
+
+.form-field__title {
+  color: #505050;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.form-field__box {
+  border: 0.6px solid #D8D8D8;
+  border-radius: 5px;
+  padding: 20px 15px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: $font-color-dark;
+}
+
+.form-field__box input {
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+.trend-actions {}
+
+.trend-action {
+  font-family: $font-family;
+  color: $font-color-secondary;
+  font-size: 14px;
+  background-color: #ffffff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+}
+.trend-action--primary:hover {
+  font-size: 16px;
+  //box-shadow: inset 400px 0 0 0 #D80286;
+}
+
+.trend-action--primary {
+  background-color: $primary;
+  color: $font-color-light;
+  width: 112px;
+  height: 40px;
+  border-radius: 5px;
+  margin-left: 16px;
+}
+
+.trend-edit__title {
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 18px;
+  color: #404040;
+}
