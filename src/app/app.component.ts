@@ -34,14 +34,6 @@ import { updateSidebarState } from './store/actions/sidebar.actions';
     </nav>
     <main class="app-main-content">
       <router-outlet></router-outlet>
-      <div class="trend__actions">
-        <button
-        class="trend__action"
-        type="button"
-        (click)="createTrend()">
-          <img src="assets/Iconos/Actions/add.svg">
-        </button>
-      </div>
     </main>
   `,
   styleUrls: ['./app.component.scss'],
@@ -60,8 +52,4 @@ export class AppComponent {
     private store: Store
   ) {}
 
-  createTrend() {
-    console.log('createe!');
-    this.store.dispatch(updateSidebarState({isCollapsed: true}));
-  }
 }

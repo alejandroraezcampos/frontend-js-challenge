@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { loadTrends } from '../store/actions/trends-list-page.actions';
-import { selectTrendsByProvider } from '../store/selectors';
+import { selectOpenedEditModal, selectTrendsByProvider } from '../store/selectors';
 import { selectIsCollapsedState } from 'src/app/store/selectors/sidebar.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-trends-list',
@@ -19,14 +20,14 @@ import { selectIsCollapsedState } from 'src/app/store/selectors/sidebar.selector
         <p class="trend__excerpt">{{ trend.body[0] }}</p>
       </a>
     </article>
-
-
+    <app-trend-edit *ngIf="openedEditTrend$ | async"></app-trend-edit>
+    <app-add-trend-btn></app-add-trend-btn>
   `,
   styleUrls: ['./trends-list.component.scss'],
 })
 export class TrendsListComponent implements OnInit {
   protected trends$ = this.store.select(selectTrendsByProvider);
-  protected isCollapsed$ = this.store.select(selectIsCollapsedState);
+  protected openedEditTrend$: Observable<boolean> = this.store.select(selectOpenedEditModal);
 
   constructor(private store: Store) {}
 

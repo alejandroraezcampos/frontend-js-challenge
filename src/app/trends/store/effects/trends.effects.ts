@@ -10,6 +10,7 @@ import * as TrendsEditPageActions from '../actions/trends-edit-page.actions';
 
 import { TrendService } from '../../trend.service';
 import { Trend } from '../../models/trend.model';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class TrendsEffects {
@@ -41,9 +42,9 @@ export class TrendsEffects {
 
 
   editTrend$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(TrendsEditPageActions.editTrend),
-    switchMap(({ id, trend }) => {
+    this.actions$.pipe(
+      ofType(TrendsEditPageActions.editTrend),
+      switchMap(({ id, trend }) => {
         return this.trendService.edit(id, trend).pipe(
           map((success) => {
             return success
@@ -53,9 +54,26 @@ export class TrendsEffects {
           catchError(() => of(TrendsApiActions.loadTrendsError()))
         );
       })
+    )
+  );
+
+
+  createTrend$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(TrendsEditPageActions.newTrend),
+    switchMap(({ trend }) => {
+        this.store.dispatch(TrendsEditPageActions.closeEditTrend())
+        return this.trendService.add(trend).pipe(
+          map((trend) => TrendsApiActions.saveTrendSuccess({ trend})),
+          catchError(() => of(TrendsApiActions.saveTrendError()))
+        );
+      },)
   )
-);
+  );
 
 
-  constructor(private actions$: Actions, private trendService: TrendService) {}
+  constructor(
+    private actions$: Actions,
+    private trendService: TrendService,
+    private store: Store) {}
 }

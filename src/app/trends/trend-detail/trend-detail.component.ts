@@ -40,18 +40,18 @@ import { openEditTrend } from '../store/actions/trends-edit-page.actions';
       </div>
     </article>
     <app-trend-edit *ngIf="openedEditTrend$ | async"></app-trend-edit>
+    <app-add-trend-btn></app-add-trend-btn>
   `,
   styleUrls: ['./trend-detail.component.scss'],
 })
 export class TrendDetailComponent {
   protected trend$ = this.store.select(selectSelectedTrend);
-  protected openedEditTrend$: Observable<Boolean> = this.store.select(selectOpenedEditModal);
+  protected openedEditTrend$: Observable<boolean> = this.store.select(selectOpenedEditModal);
 
   constructor(private store: Store) {}
 
   editTrend() {
-    console.log('cerrando la modal!')
-    this.store.dispatch(openEditTrend());
+    this.store.dispatch(openEditTrend({typeAction: 'edit'}));
   }
 
   deleteTrend() {

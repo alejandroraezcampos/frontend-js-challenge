@@ -45,3 +45,8 @@ export const selectOpenedEditModal = createSelector(
   selectTrendsState,
   fromTrendsReducer.selectOpenedEditTrend
 );
+
+export const selectTypeActionModal = createSelector(
+  selectTrendsState,
+  fromTrendsReducer.selectTypeActionModal
+);

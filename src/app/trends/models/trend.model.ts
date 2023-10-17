@@ -18,3 +18,11 @@ export interface TrendModified {
   image?: string;
   url?: string;
 }
+
+export interface TrendRequestBody {
+  title: string;
+  body: string[];
+  provider: TrendProvider;
+  image: string;
+  url: string;
+}

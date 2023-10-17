@@ -9,13 +9,15 @@ export const trendsFeatureKey = 'trends';
 
 export interface State extends EntityState<Trend> {
   selectedTrend: Trend | TrendModified | null;
-  openedEditTrend: Boolean;
+  openedEditTrend: boolean;
+  typeActionModal: string | null;
 }
 
 export const adapter: EntityAdapter<Trend> = createEntityAdapter<Trend>();
 
 export const initialState: State = adapter.getInitialState({
   selectedTrend: null,
+  typeActionModal: null,
   openedEditTrend: false
 });
 
@@ -36,11 +38,16 @@ export const trendsReducer = createReducer(
   on(TrendsApiActions.loadOneTrendError, (state): State => {
     return { ...state, selectedTrend: null };
   }),
-  on(TrendsEditActions.openEditTrend, (state): State => {
-    return { ...state, openedEditTrend: true};
+  on(TrendsEditActions.openEditTrend, (state, { typeAction: action }): State => {
+    return { ...state, openedEditTrend: true, typeActionModal: action};
+  }),
+  on(TrendsEditActions.openNewTrend, ( state, { typeAction: action } ): State => {
+    return { ...state, openedEditTrend: true, typeActionModal: action  }
   }),
   on(TrendsEditActions.closeEditTrend, (state): State => {
-    return { ...state, openedEditTrend: false};
+    return { ...state,
+      openedEditTrend: false,
+      typeActionModal: null };
   }),
   on(TrendsApiActions.editTrendSuccess, ( state, { trend: editedTrend }): State => {
     return {
@@ -48,11 +55,15 @@ export const trendsReducer = createReducer(
       selectedTrend: {...state.selectedTrend, ...editedTrend},
       openedEditTrend: false,
     };
+  }),
+  on(TrendsApiActions.saveTrendSuccess, ( state, { trend }): State => {
+    return adapter.addOne( trend, state);
   })
 );
 
 export const selectSelectedTrend = (state: State) => state.selectedTrend;
 export const selectOpenedEditTrend = (state: State) => state.openedEditTrend;
+export const selectTypeActionModal = (state: State) => state.typeActionModal;
 
 const { selectIds, selectEntities, selectAll, selectTotal } =
   adapter.getSelectors();
