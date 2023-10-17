@@ -1,11 +1,24 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Trend } from '../../models/trend.model';
+import { Trend, TrendModified } from '../../models/trend.model';
 
 export const loadTrendsSuccess = createAction(
   '[Trends/API] Load Trends Success',
   props<{ trends: Trend[] }>()
 );
+
+export const saveTrendSuccess = createAction(
+  '[Trends/API] New Trend Success',
+  props<{ trend: Trend }>()
+);
+export const editTrendSuccess = createAction(
+  '[Trends/API] Edit Trend Success',
+  props<{ trend: TrendModified }>()
+);
+
+export const saveTrendError = createAction(
+  '[Trends/API] Save Trend Error',
+)
 
 export const loadTrendsError = createAction('[Trends/API] Load Trends Error');
 

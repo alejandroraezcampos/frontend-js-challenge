@@ -4,10 +4,11 @@ import { map, Observable, of } from 'rxjs';
 
 import { GetAllTrendsResponse } from './models/get-all-trends-response.model';
 import { GetOneTrendResponse } from './models/get-one-trend-response.model';
-import { Trend } from './models/trend.model';
+import { Trend, TrendModified } from './models/trend.model';
 import { TrendProvider } from './models/trend-provider.model';
 import { TrendResponse } from './models/trend-response.model';
 import { environment } from 'src/environments/environment';
+import { EditTrendResponse } from './models/edit-trend-response.model';
 
 @Injectable()
 export class TrendService {
@@ -30,6 +31,20 @@ export class TrendService {
       .pipe(map(({ trend }) => this.mapToTrendModel(trend)));
   }
 
+  public edit( id: string, editedTrend: any): Observable<boolean> {
+    const url = `${this.getAllUrl}/${id}`;
+    return this.httpClient
+      .put<EditTrendResponse>(url, editedTrend)
+      .pipe(map(( modified ) => !!modified ))
+  }
+
+  public add( newTrend ): Observable<Trend> {
+    const url = `${this.getAllUrl}`;
+    return this.httpClient
+      .put<EditTrendResponse>(url, editedTrend)
+      .pipe(map(( modified ) => !!modified ))
+  }
+
   private mapToTrendModel(trendResponse: TrendResponse): Trend {
     return {
       id: trendResponse._id,
@@ -41,4 +56,5 @@ export class TrendService {
       url: trendResponse.url,
     };
   }
+
 }

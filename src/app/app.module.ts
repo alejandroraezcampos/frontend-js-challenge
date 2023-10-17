@@ -14,8 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppTrendsModule } from './trends';
 import { httpInterceptorProviders } from './app-http-interceptors';
 import { reducers } from './store/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import localeEs from '@angular/common/locales/es';
+import { environment } from 'src/environments/environment';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -31,6 +33,9 @@ registerLocaleData(localeEs, 'es');
     AppLayoutModule,
     AppMenuModule,
     StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({
+      logOnly: !environment.production, // Restrict extension to log-only mode
+    }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot()
   ],

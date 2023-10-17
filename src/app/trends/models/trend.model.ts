@@ -9,3 +9,12 @@ export interface Trend {
   url: string;
   createdAt: Date;
 }
+
+export interface TrendModified {
+  id?: string,
+  title?: string;
+  body?: string[];
+  provider?: TrendProvider;
+  image?: string;
+  url?: string;
+}

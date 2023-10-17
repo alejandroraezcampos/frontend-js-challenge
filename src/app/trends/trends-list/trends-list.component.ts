@@ -19,10 +19,7 @@ import { selectIsCollapsedState } from 'src/app/store/selectors/sidebar.selector
         <p class="trend__excerpt">{{ trend.body[0] }}</p>
       </a>
     </article>
-    <div class="overlay"></div>
-    <div class="modal">
-      <app-trend-edit></app-trend-edit>
-    </div>
+
 
   `,
   styleUrls: ['./trends-list.component.scss'],
