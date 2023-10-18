@@ -1,0 +1,58 @@
+<div class="overlay"></div>
+<div class="modal">
+<div class="trend-edit">
+  <div class="trend-edit__header">
+      <span class="trend-edit__title">Nueva noticia</span>
+    <div class="trend-actions">
+      <button class="trend-action"
+        (click)="closeModal()">Cancelar</button>
+      <button class="trend-action trend-action--primary"
+        (click)="saveTrend()">Guardar</button>
+    </div>
+  </div>
+  <div class="trend-edit__content" [formGroup]="trendForm">
+    <div class="form-field">
+      <span class="form-field__title">URL</span>
+      <div class="form-field__box">
+        <input
+          type="text"
+          formControlName="url">
+      </div>
+    </div>
+    <div class="form-field">
+      <span class="form-field__title">Imágen</span>
+      <div class="form-field__box">
+        <input
+          type="text"
+          formControlName="image">
+      </div>
+    </div>
+    <div class="form-field">
+      <span class="form-field__title">Autor</span>
+
+      <div class="form-field__box">
+        <select class="selector" formControlName="provider">
+          <option value="elmundo">El Mundo</option>
+          <option value="elpais">El Pais</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-field">
+      <span class="form-field__title">Titulo</span>
+      <div class="form-field__box">
+        <input
+          type="text"
+          formControlName="title">
+      </div>
+    </div>
+    <div class="form-field">
+      <span class="form-field__title">Contenido</span>
+      <div class="form-field__box">
+        <textarea type="text"
+          formControlName="body"
+          placeholder="Escribe aquí ..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

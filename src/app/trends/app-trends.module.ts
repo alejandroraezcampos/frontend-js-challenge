@@ -11,15 +11,19 @@ import { TrendService } from './trend.service';
 import { TrendsListComponent } from './trends-list/trends-list.component';
 import { trendsEffects } from './store/effects';
 import { trendsFeatureKey, trendsReducer } from './store/reducers';
-import { TrendEditComponent } from './components/trend-edit-component/trend-edit.component';
+import { TrendEditModalComponent } from './components/trend-edit-modal-component/trend-edit-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddTrendButtonComponent } from './components/add-trend-button/add-trend-button.component';
+import { TrendDeleteModalComponent } from './components/trend-delete-modal/trend-delete-modal.component';
+import { TrendAddModalComponent } from './components/trend-add-modal-component/trend-add-modal.component';
 
 @NgModule({
   declarations: [
     TrendsListComponent,
     TrendDetailComponent,
-    TrendEditComponent,
+    TrendEditModalComponent,
+    TrendDeleteModalComponent,
+    TrendAddModalComponent,
     AddTrendButtonComponent],
   imports: [
     CommonModule,

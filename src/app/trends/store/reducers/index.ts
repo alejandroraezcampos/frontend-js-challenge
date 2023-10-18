@@ -3,12 +3,12 @@ import { createReducer, on } from '@ngrx/store';
 
 import * as TrendsApiActions from '../actions/trends-api.actions';
 import * as TrendsEditActions from '../actions/trends-edit-page.actions';
-import { Trend, TrendModified } from '../../models/trend.model';
+import { Trend, TrendEdited } from '../../models/trend.model';
 
 export const trendsFeatureKey = 'trends';
 
 export interface State extends EntityState<Trend> {
-  selectedTrend: Trend | TrendModified | null;
+  selectedTrend: Trend | TrendEdited | null;
   openedEditTrend: boolean;
   typeActionModal: string | null;
 }
@@ -44,21 +44,23 @@ export const trendsReducer = createReducer(
   on(TrendsEditActions.openNewTrend, ( state, { typeAction: action } ): State => {
     return { ...state, openedEditTrend: true, typeActionModal: action  }
   }),
+  on(TrendsEditActions.openDeleteTrend, ( state, {typeAction: action }): State => {
+    return { ...state, openedEditTrend: true, typeActionModal: action }
+  }),
   on(TrendsEditActions.closeEditTrend, (state): State => {
     return { ...state,
       openedEditTrend: false,
       typeActionModal: null };
   }),
-  on(TrendsApiActions.editTrendSuccess, ( state, { trend: editedTrend }): State => {
-    return {
-      ...state,
-      selectedTrend: {...state.selectedTrend, ...editedTrend},
-      openedEditTrend: false,
-    };
+  on(TrendsApiActions.editTrendSuccess, ( state, { trend }): State => {
+    return adapter.updateOne({id: trend.id, changes: trend }, state)
   }),
   on(TrendsApiActions.saveTrendSuccess, ( state, { trend }): State => {
     return adapter.addOne( trend, state);
-  })
+  }),
+  on(TrendsApiActions.deleteTrendSuccess, ( state, { trendId }): State => {
+    return adapter.removeOne(trendId, state );
+  }),
 );
 
 export const selectSelectedTrend = (state: State) => state.selectedTrend;

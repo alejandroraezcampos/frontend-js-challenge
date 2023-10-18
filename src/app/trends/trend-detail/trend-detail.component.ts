@@ -2,8 +2,8 @@ import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { selectOpenedEditModal, selectSelectedTrend } from '../store/selectors';
-import { openEditTrend } from '../store/actions/trends-edit-page.actions';
+import { selectOpenedEditModal, selectSelectedTrend, selectTypeActionModal } from '../store/selectors';
+import { openDeleteTrend, openEditTrend } from '../store/actions/trends-edit-page.actions';
 
 @Component({
   selector: 'app-trend-detail',
@@ -39,14 +39,22 @@ import { openEditTrend } from '../store/actions/trends-edit-page.actions';
         </div>
       </div>
     </article>
-    <app-trend-edit *ngIf="openedEditTrend$ | async"></app-trend-edit>
+    <ng-container *ngIf="(openedEditTrend$ | async)">
+      <app-edit-trend-modal
+        *ngIf="(typeAction$ | async) === 'edit'"></app-edit-trend-modal>
+      <app-add-trend-modal
+        *ngIf="(typeAction$ | async) === 'new'"></app-add-trend-modal>
+      <app-delete-trend
+        *ngIf="(typeAction$ | async) == 'delete'"></app-delete-trend>
+    </ng-container>
     <app-add-trend-btn></app-add-trend-btn>
   `,
   styleUrls: ['./trend-detail.component.scss'],
 })
 export class TrendDetailComponent {
   protected trend$ = this.store.select(selectSelectedTrend);
-  protected openedEditTrend$: Observable<boolean> = this.store.select(selectOpenedEditModal);
+  protected openedEditTrend$ = this.store.select(selectOpenedEditModal);
+  protected typeAction$ = this.store.select(selectTypeActionModal);
 
   constructor(private store: Store) {}
 
@@ -55,6 +63,6 @@ export class TrendDetailComponent {
   }
 
   deleteTrend() {
-
+    this.store.dispatch(openDeleteTrend({typeAction: 'delete'}));
   }
 }

@@ -57,6 +57,19 @@ export class TrendsEffects {
     )
   );
 
+  deleteTrend$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(TrendsEditPageActions.DeleteTrend),
+    switchMap(({ trendId }) => {
+        this.store.dispatch(TrendsEditPageActions.closeDeleteTrend())
+        return this.trendService.delete(trendId).pipe(
+          map(() => TrendsApiActions.deleteTrendSuccess({ trendId})),
+          catchError(() => of(TrendsApiActions.saveTrendError()))
+        );
+      })
+    )
+  );
+
 
   createTrend$ = createEffect(() =>
   this.actions$.pipe(

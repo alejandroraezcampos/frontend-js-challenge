@@ -2,17 +2,12 @@
 <div class="modal">
 <div class="trend-edit">
   <div class="trend-edit__header">
-    <ng-container *ngIf="(selectTypeAction$ | async) == 'edit'">
-      <span class="trend-edit__title">Edita la noticia</span>
-    </ng-container>
-    <ng-container *ngIf="(selectTypeAction$ | async) == 'new'">
-      <span class="trend-edit__title">Nueva noticia</span>
-    </ng-container>
+    <span class="trend-edit__title">Nueva noticia</span>
     <div class="trend-actions">
       <button class="trend-action"
         (click)="closeModal()">Cancelar</button>
       <button class="trend-action trend-action--primary"
-        (click)="saveTrend()">Guardar</button>
+        (click)="addTrend()">Guardar</button>
     </div>
   </div>
   <div class="trend-edit__content" [formGroup]="trendForm">
