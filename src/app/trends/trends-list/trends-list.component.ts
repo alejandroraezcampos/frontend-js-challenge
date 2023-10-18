@@ -25,6 +25,7 @@ import { Observable } from 'rxjs';
         *ngIf="(typeAction$ | async) === 'new'"></app-add-trend-modal>
     </ng-container>
     <app-add-trend-btn></app-add-trend-btn>
+    <app-trend-popup-alert></app-trend-popup-alert>
   `,
   styleUrls: ['./trends-list.component.scss'],
 })

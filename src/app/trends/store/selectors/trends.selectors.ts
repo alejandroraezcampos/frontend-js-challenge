@@ -50,3 +50,15 @@ export const selectTypeActionModal = createSelector(
   selectTrendsState,
   fromTrendsReducer.selectTypeActionModal
 );
+
+export const selectPopupAlert = createSelector(
+  selectTrendsState,
+  fromTrendsReducer.selectPopupAlert
+);
+
+export const selectIsShowPopup = createSelector(
+  selectTrendsState,
+  fromTrendsReducer.selectIsShowpopupAlert
+)
+
+

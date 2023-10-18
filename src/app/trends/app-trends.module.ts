@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddTrendButtonComponent } from './components/add-trend-button/add-trend-button.component';
 import { TrendDeleteModalComponent } from './components/trend-delete-modal/trend-delete-modal.component';
 import { TrendAddModalComponent } from './components/trend-add-modal-component/trend-add-modal.component';
+import { TrendPopupAlertComponent } from './components/trend-popup-alert/trend-popup-alert.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { TrendAddModalComponent } from './components/trend-add-modal-component/t
     TrendEditModalComponent,
     TrendDeleteModalComponent,
     TrendAddModalComponent,
-    AddTrendButtonComponent],
+    AddTrendButtonComponent,
+    TrendPopupAlertComponent,
+    TrendPopupAlertComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

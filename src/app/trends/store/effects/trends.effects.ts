@@ -11,6 +11,7 @@ import * as TrendsEditPageActions from '../actions/trends-edit-page.actions';
 import { TrendService } from '../../trend.service';
 import { Trend } from '../../models/trend.model';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TrendsEffects {
@@ -47,6 +48,7 @@ export class TrendsEffects {
       switchMap(({ id, trend }) => {
         return this.trendService.edit(id, trend).pipe(
           map((success) => {
+            this.store.dispatch(TrendsEditPageActions.openPopupAlert({ textAlert: 'Noticia editada correctamente'}));
             return success
             ? TrendsApiActions.editTrendSuccess({ trend })
             : TrendsApiActions.saveTrendError()
@@ -63,7 +65,11 @@ export class TrendsEffects {
     switchMap(({ trendId }) => {
         this.store.dispatch(TrendsEditPageActions.closeDeleteTrend())
         return this.trendService.delete(trendId).pipe(
-          map(() => TrendsApiActions.deleteTrendSuccess({ trendId})),
+          map(() => {
+            this.router.navigate(['/trends'])
+            this.store.dispatch(TrendsEditPageActions.openPopupAlert({ textAlert: 'Noticia eliminada correctamente'}));
+            return TrendsApiActions.deleteTrendSuccess({ trendId})
+          }),
           catchError(() => of(TrendsApiActions.saveTrendError()))
         );
       })
@@ -77,7 +83,11 @@ export class TrendsEffects {
     switchMap(({ trend }) => {
         this.store.dispatch(TrendsEditPageActions.closeEditTrend())
         return this.trendService.add(trend).pipe(
-          map((trend) => TrendsApiActions.saveTrendSuccess({ trend})),
+          map((trend) => {
+            this.router.navigate(['/trends'])
+            this.store.dispatch(TrendsEditPageActions.openPopupAlert({ textAlert: 'Noticia creada correctamente' }));
+            return TrendsApiActions.saveTrendSuccess({ trend})
+          }),
           catchError(() => of(TrendsApiActions.saveTrendError()))
         );
       },)
@@ -87,6 +97,7 @@ export class TrendsEffects {
 
   constructor(
     private actions$: Actions,
+    private router: Router,
     private trendService: TrendService,
     private store: Store) {}
 }

@@ -40,3 +40,12 @@ export const DeleteTrend = createAction(
   props<{ trendId: string }>()
 )
 
+export const openPopupAlert = createAction(
+  '[Trend/Open popup Alert]',
+  props<{ textAlert: string }>()
+)
+
+export const closePopupAlert = createAction(
+  '[Trend/Close popup Alert]',
+)
+

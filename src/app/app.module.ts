@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { EffectsModule } from '@ngrx/effects';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
@@ -28,6 +29,7 @@ registerLocaleData(localeEs, 'es');
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppTrendsModule,
     AppRoutingModule,
     AppLayoutModule,
