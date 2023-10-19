@@ -1,0 +1,10 @@
+<div [@fadeInUp] class="popup-alert" *ngIf="isShowPopupAlert$ | async">
+  <span class="popup-alert__close-btn" (click)="closePopup()">
+    <img [src]="'assets/Iconos/Actions/close.svg'">
+  </span>
+  <span
+    *ngIf="PopupAlert$ | async as popup"
+    class="popup__text" >
+    {{ popup.textAlert }}
+  </span>
+</div>

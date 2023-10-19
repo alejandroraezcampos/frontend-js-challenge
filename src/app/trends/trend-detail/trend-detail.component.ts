@@ -1,7 +1,9 @@
+import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { selectSelectedTrend } from '../store/selectors';
+import { selectOpenedEditModal, selectSelectedTrend, selectTypeActionModal } from '../store/selectors';
+import { openDeleteTrend, openEditTrend } from '../store/actions/trends-edit-page.actions';
 
 @Component({
   selector: 'app-trend-detail',
@@ -13,10 +15,12 @@ import { selectSelectedTrend } from '../store/selectors';
     <article class="trend__detail" *ngIf="trend$ | async as trend">
       <header class="trend__header">
         <div class="trend__actions">
-          <button type="button" class="trend__action">
-            <img src="assets/Iconos/Actions/edit.svg" alt="Editar noticia" />
+          <button type="button"
+            class="trend__action" (click)="editTrend()">
+            <img src="assets/Iconos/Actions/edit.svg"
+            alt="Editar noticia" />
           </button>
-          <button type="button" class="trend__action">
+          <button type="button" class="trend__action" (click)="deleteTrend()">
             <img src="assets/Iconos/Actions/delete.svg" alt="Borrar noticia" />
           </button>
         </div>
@@ -35,11 +39,34 @@ import { selectSelectedTrend } from '../store/selectors';
         </div>
       </div>
     </article>
+    <!-- <ng-container *ngIf="(openedEditTrend$ | async)">
+      <app-edit-trend-modal
+        *ngIf="(typeAction$ | async) == 'edit'"></app-edit-trend-modal>
+      <app-add-trend-modal
+        *ngIf="(typeAction$ | async) == 'new'"></app-add-trend-modal>
+      <app-delete-trend
+        *ngIf="(typeAction$ | async) == 'delete'"></app-delete-trend>
+    </ng-container> -->
+    <app-add-trend-modal></app-add-trend-modal>
+    <app-edit-trend-modal></app-edit-trend-modal>
+    <app-delete-trend></app-delete-trend>
+    <app-add-trend-btn></app-add-trend-btn>
+    <app-trend-popup-alert></app-trend-popup-alert>
   `,
   styleUrls: ['./trend-detail.component.scss'],
 })
 export class TrendDetailComponent {
   protected trend$ = this.store.select(selectSelectedTrend);
+  protected openedEditTrend$ = this.store.select(selectOpenedEditModal);
+  protected typeAction$ = this.store.select(selectTypeActionModal);
 
   constructor(private store: Store) {}
+
+  editTrend() {
+    this.store.dispatch(openEditTrend({typeAction: 'edit'}));
+  }
+
+  deleteTrend() {
+    this.store.dispatch(openDeleteTrend({typeAction: 'delete'}));
+  }
 }

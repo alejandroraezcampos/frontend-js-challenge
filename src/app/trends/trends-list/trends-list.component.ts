@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { loadTrends } from '../store/actions/trends-list-page.actions';
-import { selectTrendsByProvider } from '../store/selectors';
+import { selectOpenedEditModal, selectTrendsByProvider, selectTypeActionModal } from '../store/selectors';
+
 
 @Component({
   selector: 'app-trends-list',
@@ -18,11 +19,9 @@ import { selectTrendsByProvider } from '../store/selectors';
         <p class="trend__excerpt">{{ trend.body[0] }}</p>
       </a>
     </article>
-    <!-- <div class="trend__actions">
-    <button type="button" class="trend__action">
-      <img src="assets/Iconos/Actions/add.svg">
-    </button>
-    </div> -->
+    <app-add-trend-modal></app-add-trend-modal>
+    <app-add-trend-btn></app-add-trend-btn>
+    <app-trend-popup-alert></app-trend-popup-alert>
   `,
   styleUrls: ['./trends-list.component.scss'],
 })

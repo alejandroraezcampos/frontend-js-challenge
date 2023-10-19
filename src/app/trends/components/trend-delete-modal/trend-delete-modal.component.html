@@ -1,0 +1,37 @@
+<ng-container *ngIf="(openedEditTrend$ | async) && (typeAction$ | async) == 'delete'">
+<div class="overlay"></div>
+<div class="modal" [@fadeInRight]>
+<div class="trend-edit">
+  <div class="trend-edit__header">
+    <span class="trend-edit__title">Elimina la noticia</span>
+    <div class="trend-actions">
+      <button class="trend-action"
+        (click)="closeModal()">Cancelar</button>
+      <button class="trend-action trend-action--primary"
+        (click)="deleteTrend()">Eliminar</button>
+    </div>
+  </div>
+  <div class="trend__detail" *ngIf="selectedTrend$ | async as trend">
+    <div class="trend__content">
+      <h2 class="trend__title">
+        <a class="trend__link" [href]="trend.url" target="_blank">
+          {{ trend.title }}
+        </a>
+      </h2>
+      <img class="trend__image" [src]="trend.image" [alt]="trend.title" />
+      <div class="trend_paragraph-container">
+        <p class="trend__paragraph" *ngFor="let paragraph of trend.body">
+          {{ paragraph }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="trend-actions--responsive">
+    <button class="trend-action trend-action--primary"
+    (click)="deleteTrend()">Eliminar</button>
+    <button class="trend-action"
+      (click)="closeModal()">Cancelar</button>
+  </div>
+</div>
+</div>
+</ng-container>
