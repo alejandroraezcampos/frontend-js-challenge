@@ -1,5 +1,6 @@
+<ng-container *ngIf="(openedEditTrend$ | async) && (typeAction$ | async) == 'delete'">
 <div class="overlay"></div>
-<div class="modal">
+<div class="modal" [@fadeInRight]>
 <div class="trend-edit">
   <div class="trend-edit__header">
     <span class="trend-edit__title">Elimina la noticia</span>
@@ -7,7 +8,7 @@
       <button class="trend-action"
         (click)="closeModal()">Cancelar</button>
       <button class="trend-action trend-action--primary"
-        (click)="deleteTrend()">Guardar</button>
+        (click)="deleteTrend()">Eliminar</button>
     </div>
   </div>
   <div class="trend__detail" *ngIf="selectedTrend$ | async as trend">
@@ -25,5 +26,12 @@
       </div>
     </div>
   </div>
+  <div class="trend-actions--responsive">
+    <button class="trend-action trend-action--primary"
+    (click)="deleteTrend()">Eliminar</button>
+    <button class="trend-action"
+      (click)="closeModal()">Cancelar</button>
+  </div>
 </div>
 </div>
+</ng-container>

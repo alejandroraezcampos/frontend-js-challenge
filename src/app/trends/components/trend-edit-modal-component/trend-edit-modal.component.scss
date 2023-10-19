@@ -1,4 +1,6 @@
+@use 'sass:color';
 @import 'settings/variables';
+
 .overlay {
   position: fixed;
   top: 0;
@@ -8,16 +10,14 @@
   z-index: 1000; /* Ajusta la z-index según sea necesario para que esté por encima de otros elementos */
   background-color: #0000004D;
 }
-
 .modal {
   position: absolute;
-  width: 490px;
   height: 100%;
+  width: 100%;
   top: 0;
   right: 0;
   z-index: 9999;
   background-color: #ffffff;
-  border-top-left-radius: 33px;
 }
 .trend-edit {
   padding: 40px;
@@ -28,7 +28,6 @@
 }
 
 .trend-edit__header {
-  margin-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +37,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .form-field {
@@ -83,7 +82,15 @@
   color: #333;
 }
 
-.trend-actions {}
+.trend-actions--responsive {
+  display: flex;
+  flex-direction: column;
+}
+
+.trend-actions {
+  display: none;
+  flex-direction: row;
+}
 
 .trend-action {
   font-family: $font-family;
@@ -96,6 +103,8 @@
   -webkit-transition: ease-out 0.4s;
   -moz-transition: ease-out 0.4s;
   transition: ease-out 0.4s;
+  padding: 10px;
+  border-radius: 5px;
 }
 .trend-action--primary:hover {
   font-size: 16px;
@@ -105,10 +114,6 @@
 .trend-action--primary {
   background-color: $primary;
   color: $font-color-light;
-  width: 112px;
-  height: 40px;
-  border-radius: 5px;
-  margin-left: 16px;
 }
 
 .trend-edit__title {
@@ -116,4 +121,29 @@
   font-weight: 600;
   font-size: 18px;
   color: #404040;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 60%;
+    border-top-left-radius: 33px;
+  }
+  .trend-actions {
+    display: flex;
+  }
+  .trend-edit__content {
+    margin-top: 40px;
+  }
+  .trend-actions--responsive {
+    position: static;
+    display: none !important;
+  }
+  .trend-action {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .modal {
+    width: 30%;
+  }
 }

@@ -3,8 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { loadTrends } from '../store/actions/trends-list-page.actions';
 import { selectOpenedEditModal, selectTrendsByProvider, selectTypeActionModal } from '../store/selectors';
-import { selectIsCollapsedState } from 'src/app/store/selectors/sidebar.selectors';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-trends-list',
@@ -20,10 +19,7 @@ import { Observable } from 'rxjs';
         <p class="trend__excerpt">{{ trend.body[0] }}</p>
       </a>
     </article>
-    <ng-container *ngIf="openedEditTrend$ | async">
-      <app-add-trend-modal
-        *ngIf="(typeAction$ | async) === 'new'"></app-add-trend-modal>
-    </ng-container>
+    <app-add-trend-modal></app-add-trend-modal>
     <app-add-trend-btn></app-add-trend-btn>
     <app-trend-popup-alert></app-trend-popup-alert>
   `,
@@ -31,8 +27,6 @@ import { Observable } from 'rxjs';
 })
 export class TrendsListComponent implements OnInit {
   protected trends$ = this.store.select(selectTrendsByProvider);
-  protected openedEditTrend$ =this.store.select(selectOpenedEditModal);
-  protected typeAction$ = this.store.select(selectTypeActionModal);
 
   constructor(private store: Store) {}
 

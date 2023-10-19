@@ -39,15 +39,19 @@ import { openDeleteTrend, openEditTrend } from '../store/actions/trends-edit-pag
         </div>
       </div>
     </article>
-    <ng-container *ngIf="(openedEditTrend$ | async)">
+    <!-- <ng-container *ngIf="(openedEditTrend$ | async)">
       <app-edit-trend-modal
-        *ngIf="(typeAction$ | async) === 'edit'"></app-edit-trend-modal>
+        *ngIf="(typeAction$ | async) == 'edit'"></app-edit-trend-modal>
       <app-add-trend-modal
-        *ngIf="(typeAction$ | async) === 'new'"></app-add-trend-modal>
+        *ngIf="(typeAction$ | async) == 'new'"></app-add-trend-modal>
       <app-delete-trend
         *ngIf="(typeAction$ | async) == 'delete'"></app-delete-trend>
-    </ng-container>
+    </ng-container> -->
+    <app-add-trend-modal></app-add-trend-modal>
+    <app-edit-trend-modal></app-edit-trend-modal>
+    <app-delete-trend></app-delete-trend>
     <app-add-trend-btn></app-add-trend-btn>
+    <app-trend-popup-alert></app-trend-popup-alert>
   `,
   styleUrls: ['./trend-detail.component.scss'],
 })

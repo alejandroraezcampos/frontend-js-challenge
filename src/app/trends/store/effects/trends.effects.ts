@@ -46,6 +46,7 @@ export class TrendsEffects {
     this.actions$.pipe(
       ofType(TrendsEditPageActions.editTrend),
       switchMap(({ id, trend }) => {
+        this.store.dispatch(TrendsEditPageActions.closeEditTrend());
         return this.trendService.edit(id, trend).pipe(
           map((success) => {
             this.store.dispatch(TrendsEditPageActions.openPopupAlert({ textAlert: 'Noticia editada correctamente'}));

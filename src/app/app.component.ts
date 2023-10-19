@@ -5,6 +5,7 @@ import { delay } from 'rxjs/operators';
 import { CustomBreakpointObserver } from './layout';
 import { selectIsCollapsedState, selectIsLoadingState } from './store/selectors';
 import { updateSidebarState } from './store/actions/sidebar.actions';
+import { selectOpenedEditModal, selectTypeActionModal } from './trends/store/selectors';
 
 @Component({
   selector: 'app-root',
@@ -46,6 +47,9 @@ export class AppComponent {
   // The delay prevents ExpressionChangedAfterItHasBeenCheckedError
   isLoading$ = this.store.select(selectIsLoadingState).pipe(delay(0));
   isCollapsed$ = this.store.select(selectIsCollapsedState).pipe(delay(0));
+
+  protected openedEditTrend$ = this.store.select(selectOpenedEditModal);
+  protected typeAction$ = this.store.select(selectTypeActionModal);
 
   constructor(
     private breakpointsObserver: CustomBreakpointObserver,

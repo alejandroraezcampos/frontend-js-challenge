@@ -11,3 +11,15 @@
   background-color: $primary;
   box-shadow: 0px 6px 20px 0px #F15F4199;
 }
+
+@media screen and (max-width: 767px) {
+  .add_btn {
+    top:auto;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 50px;
+    height: 50px;
+  }
+}

@@ -12,13 +12,12 @@
 }
 .modal {
   position: absolute;
-  width: 490px;
   height: 100%;
+  width: 100%;
   top: 0;
   right: 0;
   z-index: 9999;
   background-color: #ffffff;
-  border-top-left-radius: 33px;
 }
 .trend-edit {
   padding: 40px;
@@ -29,7 +28,6 @@
 }
 
 .trend-edit__header {
-  margin-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,7 +37,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .form-field {
@@ -84,7 +82,15 @@
   color: #333;
 }
 
-.trend-actions {}
+.trend-actions--responsive {
+  display: flex;
+  flex-direction: column;
+}
+
+.trend-actions {
+  display: none;
+  flex-direction: row;
+}
 
 .trend-action {
   font-family: $font-family;
@@ -97,6 +103,8 @@
   -webkit-transition: ease-out 0.4s;
   -moz-transition: ease-out 0.4s;
   transition: ease-out 0.4s;
+  padding: 10px;
+  border-radius: 5px;
 }
 .trend-action--primary:hover {
   font-size: 16px;
@@ -106,10 +114,6 @@
 .trend-action--primary {
   background-color: $primary;
   color: $font-color-light;
-  width: 112px;
-  height: 40px;
-  border-radius: 5px;
-  margin-left: 16px;
 }
 
 .trend-edit__title {
@@ -119,166 +123,26 @@
   color: #404040;
 }
 
-
-.link-to-home {
-  display: none;
-  visibility: hidden;
-}
-
-.trend__detail {
-  margin-top: 80px;
-  display: flex;
-  flex-flow: column nowrap;
-  margin-bottom: 4rem;
-}
-
-.trend__actions {
-  display: flex;
-  justify-content: flex-end;
-  padding-bottom: 0.875rem;
-}
-
-.trend__action {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 2rem;
-  border: none;
-  margin: 0;
-  margin-left: 0.75rem;
-  padding: 0;
-  text-align: center;
-  background-color: color.scale($primary, $alpha: -80%);
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  & > img {
-    width: 50%;
-    vertical-align: bottom;
-  }
-}
-
-.trend__image {
-  max-width: 100%;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 0.35294117647058826rem;
-}
-
-.trend__content {
-  margin-top: -1.8125rem;
-}
-
-.trend__title {
-  font-size: 0.875rem;
-  margin-bottom: 0.8125rem;
-}
-
-.trend__link {
-  position: relative;
-  text-decoration: none;
-  color: $font-color-dark;
-
-  &:hover,
-  &:active {
-    text-decoration: underline;
-  }
-}
-
-.trend__paragraph {
-  font-size: 0.875rem;
-  margin-top: 20px;
-
-  &:not(:last-of-type) {
-    margin-bottom: 2rem;
-  }
-}
-
 @media screen and (min-width: 768px) {
-  .trend__detail {
-    margin-bottom: 1rem;
+  .modal {
+    width: 60%;
+    border-top-left-radius: 33px;
   }
-
-  .trend__header {
+  .trend-actions {
     display: flex;
   }
-
-  .trend__actions {
-    order: 2;
-    flex-direction: column;
-    padding: 0;
-    justify-content: flex-start;
-    padding-left: 2.03125rem;
+  .trend-edit__content {
+    margin-top: 40px;
   }
-
-  .trend__action {
-    margin: 0;
-    width: 3.25rem;
-    height: 3.25rem;
-    margin-bottom: 1rem;
-
-    & > img {
-      width: 40%;
-    }
+  .trend-actions--responsive {
+    display: none;
   }
-
-  .trend__image {
-    aspect-ratio: 2 / 1;
-  }
-
-  .trend__title {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .trend__link::after {
-    bottom: 0.4rem;
-  }
-
-  .trend__content {
-    // margin-left: 24px;
-    // margin-right: 109px;
-    // margin-top: -0.5rem;
-    // padding: 2.5rem;
+  .trend-action {
+    margin-bottom: 10px;
   }
 }
-
 @media screen and (min-width: 1440px) {
-  .link-to-home {
-    text-decoration: none;
-    color: $accent;
-    display: flex;
-    visibility: visible;
-    align-items: center;
-    margin-bottom: 2.625rem;
-
-    & > img {
-      width: 2rem;
-      margin-right: 0.75rem;
-    }
-
-    & > span {
-      font-size: 0.875rem;
-    }
-  }
-
-  .trend__actions {
-    padding-left: 2.9375rem;
-  }
-
-  .trend__content {
-    // padding: 3rem 3.125rem;
-    // margin-left: 48px;
-    // margin-right: 146px;
-    // max-width: 1184px;
-    // margin-top: -3rem;
-  }
-
-  .trend_paragraph-container {
-    column-count: 2;
-    column-gap: 2.5rem;
+  .modal {
+    width: 30%;
   }
 }

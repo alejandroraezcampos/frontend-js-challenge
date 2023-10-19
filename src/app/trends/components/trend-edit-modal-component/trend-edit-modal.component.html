@@ -1,13 +1,14 @@
+<ng-container *ngIf="(openedEditTrend$ | async) && (typeAction$ | async) == 'edit'">
 <div class="overlay"></div>
-<div class="modal">
+<div class="modal" [@fadeInRight]>
 <div class="trend-edit">
   <div class="trend-edit__header">
-      <span class="trend-edit__title">Nueva noticia</span>
+      <span class="trend-edit__title">Editar Noticia</span>
     <div class="trend-actions">
       <button class="trend-action"
         (click)="closeModal()">Cancelar</button>
       <button class="trend-action trend-action--primary"
-        (click)="saveTrend()">Guardar</button>
+        (click)="editTrend()">Guardar</button>
     </div>
   </div>
   <div class="trend-edit__content" [formGroup]="trendForm">
@@ -54,5 +55,12 @@
       </div>
     </div>
   </div>
+  <div class="trend-actions--responsive">
+    <button class="trend-action trend-action--primary"
+    (click)="editTrend()">Guardar</button>
+    <button class="trend-action"
+      (click)="closeModal()">Cancelar</button>
+  </div>
 </div>
 </div>
+</ng-container>
